@@ -1,0 +1,32 @@
+# Files and directories to exclude from deployment uploads.
+# Lines starting with # are comments. Blank lines are ignored.
+#
+# Patterns:
+#   dir_name/     - exclude any directory with this name (anywhere in tree)
+#   *.ext         - exclude files matching this extension
+#   exact_name    - exclude exact file/directory name matches
+
+# Archives
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info
+dist/
+build/
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# Version control
+.git/
+
+# IDE / caches
+.pytest_cache/
+.mypy_cache/
+
+# Local-only scripts (not needed in deployment package)
+test_mcp_retrieval.sh

@@ -1,0 +1,7 @@
+config.env
+legaltech-rag-agent/.env
+.do/app.deploy.yaml
+*.bak
+__pycache__/
+.pytest_cache/
+.venv/

@@ -1,0 +1,24 @@
+{
+  "name": "legaltech-cases-kb",
+  "embedding_model_uuid": "22652c2a-79ed-11ef-bf8f-4e013e2ddde4",
+  "project_id": "REPLACE_WITH_DO_PROJECT_ID",
+  "region": "tor1",
+  "vpc_uuid": "db9169a0-e935-4329-9add-3ee52359105a",
+  "tags": ["legaltech-tutorial"],
+  "datasources": [
+    {
+      "spaces_data_source": {
+        "bucket_name": "legaltech-casefiles-tutorial",
+        "region": "tor1"
+      },
+      "chunking_algorithm": "CHUNKING_ALGORITHM_SECTION_BASED",
+      "chunking_options": {
+        "max_chunk_size": 256
+      }
+    }
+  ],
+  "reranking_config": {
+    "enabled": true,
+    "model": "bge-reranker-v2-m3"
+  }
+}

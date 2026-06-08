@@ -1,0 +1,57 @@
+# App Platform spec — deploy without Gradient ADK feature preview.
+# Requires GitHub repo: anishsingh20/legaltech-rag-agent (private is fine).
+#
+# Deploy with secrets from config.env:
+#   ./scripts/deploy_app_platform.sh
+#
+# Or manually:
+#   doctl apps create --spec .do/app.deploy.yaml --project-id YOUR_PROJECT_ID
+
+name: legaltech-rag-agent
+region: tor
+
+services:
+  - name: api
+    github:
+      repo: anishsingh20/legaltech-rag-agent
+      branch: main
+      deploy_on_push: true
+    source_dir: legaltech-rag-agent
+    environment_slug: python
+    build_command: pip install -r requirements-serve.txt
+    run_command: uvicorn serve:app --host 0.0.0.0 --port 8080
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    http_port: 8080
+    health_check:
+      http_path: /health
+      initial_delay_seconds: 10
+      period_seconds: 10
+      timeout_seconds: 5
+      failure_threshold: 3
+    routes:
+      - path: /
+    envs:
+      - key: MODEL_ACCESS_KEY
+        scope: RUN_TIME
+        type: SECRET
+        value: REPLACE_ME
+      - key: DIGITALOCEAN_API_TOKEN
+        scope: RUN_TIME
+        type: SECRET
+        value: REPLACE_ME
+      - key: KNOWLEDGE_BASE_ID
+        scope: RUN_TIME
+        value: REPLACE_ME
+      - key: INFERENCE_MODEL
+        scope: RUN_TIME
+        value: anthropic-claude-sonnet-4
+      - key: RETRIEVAL_MODE
+        scope: RUN_TIME
+        value: rest
+      - key: NUM_RESULTS
+        scope: RUN_TIME
+        value: "5"
+      - key: RETRIEVAL_ALPHA
+        scope: RUN_TIME
+        value: "0.5"
