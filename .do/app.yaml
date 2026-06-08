@@ -12,10 +12,9 @@ region: tor
 
 services:
   - name: api
-    github:
-      repo: anishsingh20/legaltech-rag-agent
+    git:
+      repo_clone_url: https://github.com/anishsingh20/legaltech-rag-agent.git
       branch: main
-      deploy_on_push: true
     source_dir: legaltech-rag-agent
     environment_slug: python
     build_command: pip install -r requirements-serve.txt

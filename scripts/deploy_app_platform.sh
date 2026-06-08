@@ -50,4 +50,4 @@ fi
 APP_ID=$(doctl apps list --format ID,Spec.Name --no-header | awk '$2=="legaltech-rag-agent"{print $1; exit}')
 echo ""
 echo "App ID: $APP_ID"
-doctl apps get "$APP_ID" --format ID,DefaultIngress,ActiveDeployment.Phase
+doctl apps get "$APP_ID" --format ID,Spec.Name,DefaultIngress
